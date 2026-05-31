@@ -19,7 +19,7 @@ mod services;
 
 #[tokio::main]
 async fn main() {
-    let repo = Arc::new(RedisRepository::new());
+    let repo = Arc::new(RedisRepository::new().await.unwrap());
     let service = Arc::new(Service::new(repo));
     let app = Router::new()
         .route("/shorten", post(shorten))
